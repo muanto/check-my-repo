@@ -15,6 +15,11 @@ const usePushMoreIO = () => {
   const sendData = React.useCallback(async (data: UsePushMoreIODataType) => {
     setState("loading");
     try {
+      // await fetch(pushMoreUrl, {
+      //   method: "POST",
+      //   body: JSON.stringify(data),
+      // });
+
       await axios.post(pushMoreUrl, data);
       setState("success");
     } catch (error) {
