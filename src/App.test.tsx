@@ -1,23 +1,70 @@
-import React, { act } from "react";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
+import { render } from "./testing/render";
 import App from "./App";
-import { Provider } from "react-redux";
+import { Provider as ReduxProvider } from "react-redux";
 import store from "./store/store";
-test("renders learn react link", () => {
+import { Provider } from "./components/ui/provider";
+
+test("Testing CheckMyRepro App", async () => {
+  // Riassegna funzione fetch per simulate chiamata http fallita
+  // global.fetch = jest.fn().mockRejectedValue(new Error("Network error"));
+  global.fetch = jest.fn().mockResolvedValue({
+    ok: true,
+    json: () => Promise.resolve("OK"),
+  });
   render(
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <ReduxProvider store={store}>
+      <App Component={undefined} pageProps={undefined} />
+    </ReduxProvider>
   );
 
+  //welcome screen
   const titleElement = screen.getByText(/Benvenuto/i);
   expect(titleElement).toBeInTheDocument();
   const proceedButton = screen.getByText(/Procediamo/i);
-  expect(titleElement).toBeInTheDocument();
-  act(() => {
-    proceedButton.click();
-  });
+  expect(proceedButton).toBeInTheDocument();
+  fireEvent.click(proceedButton);
 
-  const usernameInput = screen.getByPlaceholderText(/username/i);
+  //Username screen
+  const usernameInput = screen.getByPlaceholderText(
+    /Scrivi il tuo username di github/i
+  );
   expect(usernameInput).toBeInTheDocument();
+  expect(usernameInput).toHaveFocus();
+  expect(usernameInput).toHaveValue("");
+
+  var nextButton = screen.getByTestId("next-button");
+  expect(nextButton).toBeInTheDocument();
+  expect(nextButton).toBeDisabled();
+
+  fireEvent.change(usernameInput, { target: { value: "testuser" } });
+  expect(usernameInput).toHaveValue("testuser");
+
+  expect(nextButton).not.toBeDisabled();
+  fireEvent.click(nextButton);
+
+  //Repository screen
+  const repositoryNameInput = screen.getByPlaceholderText(
+    /Scrivi il nome del repo di github/i
+  );
+  expect(repositoryNameInput).toBeInTheDocument();
+  expect(repositoryNameInput).toHaveFocus();
+  expect(repositoryNameInput).toHaveValue("");
+
+  nextButton = screen.getByTestId("next-button");
+  expect(nextButton).toBeInTheDocument();
+  expect(nextButton).toBeDisabled();
+
+  fireEvent.change(repositoryNameInput, { target: { value: "testrepo" } });
+  expect(repositoryNameInput).toHaveValue("testrepo");
+  expect(nextButton).not.toBeDisabled();
+  fireEvent.click(nextButton);
+
+  //Check screen
+  const checkScreenTitle = screen.getByText(/Controllo dati inseriti/i);
+  expect(checkScreenTitle).toBeInTheDocument();
+  const sendButton = screen.getByText(/Invio/i);
+  expect(sendButton).toBeInTheDocument();
+  fireEvent.click(sendButton);
+  await screen.findByText("Errore durante invio verificare e riprovare");
 });

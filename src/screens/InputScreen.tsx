@@ -5,6 +5,7 @@ import { ScreenContainer } from "../components/containers";
 import NavigationBar from "../components/NavigationBar";
 import { useEffect, useRef, useState } from "react";
 import { TextInput } from "../components/inputs";
+import { Input } from "@chakra-ui/react";
 
 interface InputScreenProps {
   title: string;
@@ -38,7 +39,8 @@ const InputScreen = ({
           ev.preventDefault();
         }}
       >
-        <TextInput
+        <Input
+          variant="flushed"
           ref={inputRef}
           value={inputValue}
           placeholder={inputPlaceholder}

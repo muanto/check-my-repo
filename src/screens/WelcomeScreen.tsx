@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { nextScreen } from "../store/checkMyRepoSlice";
 import { Title } from "../components/typo";
 import { ScreenContainer } from "../components/containers";
+import { NextIcon } from "../components/icons";
 
 const WelcomeScreen = () => {
   const dispatch = useDispatch();
@@ -13,7 +14,10 @@ const WelcomeScreen = () => {
         Nelle prossime schermate verra richiesto di inserire <br /> username e
         nome del repository del tuo progetto github
       </p>
-      <Button onClick={() => dispatch(nextScreen())}>Procediamo</Button>
+      <Button onClick={() => dispatch(nextScreen())}>
+        Procediamo
+        <NextIcon />
+      </Button>
     </ScreenContainer>
   );
 };

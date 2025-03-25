@@ -6,13 +6,17 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store from "./store/store";
 import "./index.css";
+import { ChakraProvider, defaultSystem, Heading } from "@chakra-ui/react";
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ChakraProvider value={defaultSystem}>
+        <App />
+      </ChakraProvider>
     </Provider>
   </React.StrictMode>
 );

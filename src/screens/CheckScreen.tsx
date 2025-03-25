@@ -1,7 +1,7 @@
-import { Button, SendButton } from "../components/buttons";
+import { SendButton } from "../components/buttons";
 import { useDispatch, useSelector } from "react-redux";
 import { nextScreen } from "../store/checkMyRepoSlice";
-import { DataValue, ErrorMessage, Title } from "../components/typo";
+import { DataValue, ErrorMessage } from "../components/typo";
 import { ScreenContainer } from "../components/containers";
 import NavigationBar from "../components/NavigationBar";
 import usePushMoreIO from "../hooks/usePushMoreIO";
@@ -30,7 +30,7 @@ const CheckScreen = () => {
   const isLoading: boolean = pushMoreIo.state === "loading";
   return (
     <ScreenContainer>
-      <NavigationBar title="Controllo dati inriti" nextShow={false} />
+      <NavigationBar title="Controllo dati inseriti" nextShow={false} />
       <DataValue>/{username}</DataValue>
       <DataValue>/{repositoryName}</DataValue>
 

@@ -20,7 +20,6 @@ app.post("/send-telegram-message", async (req, res) => {
       });
       res.status(200).send("OK");
     } catch (error) {
-      console.error("Errore invio messaggio a Telegram:", error);
       res.status(500).send("Errore invio messaggio a Telegram " + error);
     }
   }, 2000);

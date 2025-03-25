@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 
 export interface UsePushMoreIODataType {
   username: string;
@@ -15,12 +15,13 @@ const usePushMoreIO = () => {
   const sendData = React.useCallback(async (data: UsePushMoreIODataType) => {
     setState("loading");
     try {
-      // await fetch(pushMoreUrl, {
-      //   method: "POST",
-      //   body: JSON.stringify(data),
-      // });
+      // Axios causa problemi con i test
+      // await axios.post(pushMoreUrl, data);
+      await fetch(pushMoreUrl, {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
 
-      await axios.post(pushMoreUrl, data);
       setState("success");
     } catch (error) {
       setState("error");

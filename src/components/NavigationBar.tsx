@@ -1,12 +1,13 @@
-import { NavigationButton } from "../components/buttons";
 import { useDispatch } from "react-redux";
 
 import { nextScreen, prevScreen } from "../store/checkMyRepoSlice";
 
 import { Title } from "../components/typo";
 import styled from "styled-components";
+import { NextIcon, PrevIcon } from "./icons";
+import { Button } from "./buttons";
 
-export const NavigationBarWrapper = styled.div`
+const NavigationBarWrapper = styled.div`
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
@@ -14,10 +15,19 @@ export const NavigationBarWrapper = styled.div`
   margin-bottom: 20px;
 
   ${Title} {
-    margin: 0 20px;
+    padding: 0 20px;
   }
 `;
+const NavigationButton = styled(Button)`
+  background: rgb(237, 242, 246);
+  color: rgb(0, 0, 0);
+  padding: 8px;
 
+  &:disabled {
+    background: rgba(237, 242, 246, 0.5);
+    color: rgba(0, 0, 0, 0.3);
+  }
+`;
 interface NavigationBarProps {
   title: string;
   nextShow?: boolean;
@@ -39,10 +49,11 @@ const NavigationBar = ({
       <div>
         {prevShow && (
           <NavigationButton
+            data-testid="prev-button"
             disabled={prevDisabled}
             onClick={() => dispatch(prevScreen())}
           >
-            {"<"}
+            <PrevIcon />
           </NavigationButton>
         )}
       </div>
@@ -52,10 +63,11 @@ const NavigationBar = ({
       <div>
         {nextShow && (
           <NavigationButton
+            data-testid="next-button"
             disabled={nextDisabled}
             onClick={() => dispatch(nextScreen())}
           >
-            {">"}
+            <NextIcon />
           </NavigationButton>
         )}
       </div>
