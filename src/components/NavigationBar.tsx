@@ -2,10 +2,9 @@ import { useDispatch } from "react-redux";
 
 import { nextScreen, prevScreen } from "../store/checkMyRepoSlice";
 
-import { Title } from "../components/typo";
+import { Button, Title } from "../components/customUI";
 import styled from "styled-components";
 import { NextIcon, PrevIcon } from "./icons";
-import { Heading, Button } from "@chakra-ui/react";
 
 const NavigationBarWrapper = styled.div`
   display: flex;
@@ -48,33 +47,27 @@ const NavigationBar = ({
     <NavigationBarWrapper>
       <div>
         {prevShow && (
-          <Button
-            size="sm"
-            colorPalette="gray"
+          <NavigationButton
             data-testid="prev-button"
             disabled={prevDisabled}
             onClick={() => dispatch(prevScreen())}
           >
             <PrevIcon />
-          </Button>
+          </NavigationButton>
         )}
       </div>
 
-      <Heading size="4xl" fontWeight={700} ml={5} mr={5}>
-        {title}
-      </Heading>
+      <Title>{title}</Title>
 
       <div>
         {nextShow && (
-          <Button
-            size="sm"
-            colorPalette="gray"
+          <NavigationButton
             data-testid="next-button"
             disabled={nextDisabled}
             onClick={() => dispatch(nextScreen())}
           >
             <NextIcon />
-          </Button>
+          </NavigationButton>
         )}
       </div>
     </NavigationBarWrapper>

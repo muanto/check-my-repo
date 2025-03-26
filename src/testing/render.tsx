@@ -1,11 +1,14 @@
 // ./testing/render.tsx
-import { Provider } from "@/components/ui/provider";
 import { render as rtlRender } from "@testing-library/react";
 
-export function render(ui: React.ReactNode) {
+export function customRender(ui: React.ReactNode) {
   return rtlRender(<>{ui}</>, {
-    wrapper: (props: React.PropsWithChildren) => (
-      <Provider>{props.children}</Provider>
-    ),
+    wrapper: (props: React.PropsWithChildren) => props.children,
   });
 }
+
+// re-export everything
+export * from "@testing-library/react";
+
+// override render method
+export { customRender as render };

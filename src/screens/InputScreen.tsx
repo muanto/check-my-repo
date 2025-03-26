@@ -1,10 +1,9 @@
 import { useDispatch } from "react-redux";
 import { nextScreen } from "../store/checkMyRepoSlice";
-import { ErrorMessage } from "../components/typo";
+import { ErrorMessage, Input } from "../components/customUI";
 import { ScreenContainer } from "../components/customUI";
 import NavigationBar from "../components/NavigationBar";
 import { useEffect, useRef, useState } from "react";
-import { Input, VStack } from "@chakra-ui/react";
 
 interface InputScreenProps {
   title: string;
@@ -30,7 +29,7 @@ const InputScreen = ({
 
   const isNextDisabled: boolean = inputValue.length === 0;
   return (
-    <VStack minW={"50%"}>
+    <ScreenContainer>
       <NavigationBar title={title} nextDisabled={isNextDisabled} />
       <form
         onSubmit={(ev) => {
@@ -39,9 +38,8 @@ const InputScreen = ({
         }}
       >
         <Input
-          width={300}
-          variant="flushed"
           ref={inputRef}
+          style={{ minWidth: "400px" }}
           value={inputValue}
           placeholder={inputPlaceholder}
           onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,7 +53,7 @@ const InputScreen = ({
       <ErrorMessage>
         {!pristine && inputValue.length === 0 && "Valore richiesto"}
       </ErrorMessage>
-    </VStack>
+    </ScreenContainer>
   );
 };
 export default InputScreen;

@@ -1,16 +1,16 @@
-import { fireEvent, screen } from "@testing-library/react";
-import { render } from "./testing/render";
+import { cleanup, fireEvent, screen } from "@testing-library/react";
 import App from "./App";
 import { Provider as ReduxProvider } from "react-redux";
 import store from "./store/store";
+import { render } from "./testing/render";
+afterEach(cleanup);
 describe("CheckMyRepro App", () => {
-  test("Testing Failed", async () => {
-    // Riassegna funzione fetch per simulate chiamata http fallita
-    global.fetch = jest.fn().mockRejectedValue(new Error("Network error"));
-    // global.fetch = jest.fn().mockResolvedValue({
-    //   ok: true,
-    //   json: () => Promise.resolve("OK"),
-    // });
+  test("Testing Success", async () => {
+    // Riassegna funzione fetch per simulate chiamata http riuscita
+    global.fetch = jest.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve("OK"),
+    });
     render(
       <ReduxProvider store={store}>
         <App />
@@ -65,15 +65,15 @@ describe("CheckMyRepro App", () => {
     const sendButton = screen.getByText(/Invio/i);
     expect(sendButton).toBeInTheDocument();
     fireEvent.click(sendButton);
-    await screen.findByText("Errore durante invio verificare e riprovare");
-  });
 
-  test("Testing Success", async () => {
-    // Riassegna funzione fetch per simulate chiamata http riuscita
-    global.fetch = jest.fn().mockResolvedValue({
-      ok: true,
-      json: () => Promise.resolve("OK"),
-    });
+    await screen.findByText(/Respository mandato/i);
+    fireEvent.click(screen.getByText(/Home/i));
+    await screen.findByText(/benvenuto/i);
+  });
+  test("Testing Failed", async () => {
+    // Riassegna funzione fetch per simulate chiamata http fallita
+    global.fetch = jest.fn().mockRejectedValue(new Error("Network error"));
+
     render(
       <ReduxProvider store={store}>
         <App />

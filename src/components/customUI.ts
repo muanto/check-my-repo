@@ -1,5 +1,14 @@
-import { keyframes } from "@emotion/react";
-import styled from "@emotion/styled";
+import styled, { keyframes } from "styled-components";
+
+// Animations
+const slideAnimation = keyframes`
+  0% {
+     opacity:0;
+  } 
+  100% {
+   opacity:1;
+  }
+`;
 
 // Containers
 export const AppContainer = styled.div`
@@ -11,13 +20,6 @@ export const AppContainer = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
-const slideAnimation = keyframes`
-  0% {
-     opacity:0;
-  } 100% {
-   opacity:1;
-  }`;
 
 export const ScreenContainer = styled.div`
   min-width: 300px;
@@ -64,4 +66,28 @@ export const Input = styled.input`
   &:focus {
     border-bottom-width: 2px;
   }
+`;
+
+// Typo
+export const Title = styled.h1`
+  font-size: 36px;
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+`;
+export const Paragraph = styled.p`
+  font-size: 24px;
+  font-weight: 100;
+  color: rgb(0, 0, 0);
+`;
+export const DataValue = styled.div`
+  font-size: 30px;
+  padding: 0;
+  margin: 0;
+`;
+
+export const ErrorMessage = styled.div`
+  font-size: 12px;
+  height: 14px;
+  color: red;
 `;
