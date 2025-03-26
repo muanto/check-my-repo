@@ -66,7 +66,7 @@ describe("CheckMyRepro App", () => {
     expect(sendButton).toBeInTheDocument();
     fireEvent.click(sendButton);
 
-    await screen.findByText(/Respository mandato/i);
+    await screen.findByText(/Repository mandato/i);
     fireEvent.click(screen.getByText(/Home/i));
     await screen.findByText(/benvenuto/i);
   });

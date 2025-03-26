@@ -6,7 +6,7 @@ const SuccessScreen = () => {
   const dispatch = useDispatch();
   return (
     <ScreenContainer>
-      <Title>Respository mandato!</Title>
+      <Title>Repository mandato!</Title>
       <Button onClick={() => dispatch(restart())}>Home</Button>
     </ScreenContainer>
   );
