@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
     "target": "es6",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -16,8 +18,6 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
     "paths": {
       "@/*": ["./src/*"]
     }

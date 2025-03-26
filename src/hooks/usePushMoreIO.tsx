@@ -17,9 +17,17 @@ const usePushMoreIO = () => {
     try {
       // Axios causa problemi con i test
       // await axios.post(pushMoreUrl, data);
+
+      const payLoad = {
+        sender: "Antonio Murolo",
+        repoUrl: `https://github.com/${data.username}/${data.repositoryName}`,
+      };
       await fetch(pushMoreUrl, {
+        headers: {
+          "Content-Type": "application/json",
+        },
         method: "POST",
-        body: JSON.stringify(data),
+        body: JSON.stringify(payLoad),
       });
 
       setState("success");

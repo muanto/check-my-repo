@@ -9,20 +9,17 @@ app.use(bodyParser.json());
 const pushMoreUrl = "https://pushmore.io/webhook/34LQgwoNxStyVqk9Tk3dmiwM";
 
 app.post("/send-telegram-message", async (req, res) => {
-  const { username, repositoryName } = req.body;
+  const { sender, repoUrl } = req.body;
 
-  res.set({ "Access-Control-Allow-Origin": "*" });
-  setTimeout(async () => {
-    try {
-      await axios.post(pushMoreUrl, {
-        sender: username,
-        repoUrl: repositoryName,
-      });
-      res.status(200).send("OK");
-    } catch (error) {
-      res.status(500).send("Errore invio messaggio a Telegram " + error);
-    }
-  }, 2000);
+  try {
+    await axios.post(pushMoreUrl, {
+      sender: sender,
+      repoUrl: repoUrl,
+    });
+    res.status(200).send("OK");
+  } catch (error) {
+    res.status(500).send("Errore invio messaggio a Telegram " + error);
+  }
 });
 
 const PORT = 5500;

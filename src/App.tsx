@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./store/store";
 import { setUsername, setRepositoryName } from "./store/checkMyRepoSlice";
-import { AppContainer } from "./components/containers";
+import { AppContainer } from "./components/customUI";
 import WelcomeScreen from "./screens/WelcomeScreen";
 import CheckScreen from "./screens/CheckScreen";
 import InputScreen from "./screens/InputScreen";
 import SuccessScreen from "./screens/SuccessScreen";
+import { Center, Container } from "@chakra-ui/react";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ export default function App() {
   );
 
   return (
-    <AppContainer>
+    <Center h="100vh">
       {currentScreen === 0 && <WelcomeScreen />}
       {currentScreen === 1 && (
         <InputScreen
@@ -40,6 +41,6 @@ export default function App() {
       {currentScreen === 3 && <CheckScreen />}
 
       {currentScreen === 4 && <SuccessScreen />}
-    </AppContainer>
+    </Center>
   );
 }

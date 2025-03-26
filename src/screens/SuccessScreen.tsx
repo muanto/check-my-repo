@@ -1,15 +1,18 @@
-import { Button } from "../components/buttons";
 import { useDispatch } from "react-redux";
 import { restart } from "../store/checkMyRepoSlice";
-import { Title } from "../components/typo";
-import { ScreenContainer } from "../components/containers";
+import { ScreenContainer } from "../components/customUI";
+import { Button, Heading } from "@chakra-ui/react";
 
 const SuccessScreen = () => {
   const dispatch = useDispatch();
   return (
     <ScreenContainer>
-      <Title>Respository mandato!</Title>
-      <Button onClick={() => dispatch(restart())}>Home</Button>
+      <Heading size="5xl" fontWeight={700} mb={10}>
+        Respository mandato!
+      </Heading>
+      <Button colorPalette="blue" onClick={() => dispatch(restart())}>
+        Home
+      </Button>
     </ScreenContainer>
   );
 };

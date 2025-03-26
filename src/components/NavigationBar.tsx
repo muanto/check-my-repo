@@ -5,7 +5,7 @@ import { nextScreen, prevScreen } from "../store/checkMyRepoSlice";
 import { Title } from "../components/typo";
 import styled from "styled-components";
 import { NextIcon, PrevIcon } from "./icons";
-import { Button } from "./buttons";
+import { Heading, Button } from "@chakra-ui/react";
 
 const NavigationBarWrapper = styled.div`
   display: flex;
@@ -48,27 +48,33 @@ const NavigationBar = ({
     <NavigationBarWrapper>
       <div>
         {prevShow && (
-          <NavigationButton
+          <Button
+            size="sm"
+            colorPalette="gray"
             data-testid="prev-button"
             disabled={prevDisabled}
             onClick={() => dispatch(prevScreen())}
           >
             <PrevIcon />
-          </NavigationButton>
+          </Button>
         )}
       </div>
 
-      <Title>{title}</Title>
+      <Heading size="4xl" fontWeight={700} ml={5} mr={5}>
+        {title}
+      </Heading>
 
       <div>
         {nextShow && (
-          <NavigationButton
+          <Button
+            size="sm"
+            colorPalette="gray"
             data-testid="next-button"
             disabled={nextDisabled}
             onClick={() => dispatch(nextScreen())}
           >
             <NextIcon />
-          </NavigationButton>
+          </Button>
         )}
       </div>
     </NavigationBarWrapper>

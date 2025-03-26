@@ -1,12 +1,12 @@
-import { SendButton } from "../components/buttons";
 import { useDispatch, useSelector } from "react-redux";
 import { nextScreen } from "../store/checkMyRepoSlice";
-import { DataValue, ErrorMessage } from "../components/typo";
-import { ScreenContainer } from "../components/containers";
+import { ErrorMessage } from "../components/typo";
+import { ScreenContainer } from "../components/customUI";
 import NavigationBar from "../components/NavigationBar";
 import usePushMoreIO from "../hooks/usePushMoreIO";
 import { RootState } from "../store/store";
 import { useEffect } from "react";
+import { Button, Text } from "@chakra-ui/react";
 
 const CheckScreen = () => {
   const dispatch = useDispatch();
@@ -31,15 +31,18 @@ const CheckScreen = () => {
   return (
     <ScreenContainer>
       <NavigationBar title="Controllo dati inseriti" nextShow={false} />
-      <DataValue>/{username}</DataValue>
-      <DataValue>/{repositoryName}</DataValue>
+      <Text textStyle="4xl">/{username}</Text>
+      <Text textStyle="4xl" mb={10}>
+        /{repositoryName}
+      </Text>
 
-      <SendButton
+      <Button
         onClick={!isLoading ? sendData : undefined}
         disabled={isLoading}
+        colorPalette="orange"
       >
         {isLoading ? "Invio in corso" : "Invio!"}
-      </SendButton>
+      </Button>
 
       <ErrorMessage>
         {pushMoreIo.state === "error"
